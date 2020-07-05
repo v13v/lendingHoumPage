@@ -73,9 +73,12 @@ window.addEventListener('DOMContentLoaded', () => {
             popUpClose = document.querySelector('.popup-close'),
             popupContent = document.querySelector('.popup-content');
             const popUpAnimation = () => {
+                if( window.innerWidth <= 768 ){
+                    popup.style.display = `block`;//выполнять
+               }else{
                 popup.style.display = `block`;
                 popupContent.style.opacity = '0';
-                let count = 0;
+                let count = 0;               
                 const toggleOpacity = setInterval(() => {
                     if(count < 1) {
                         popupContent.style.opacity = count += 0.1;                   
@@ -84,6 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
                     }
                 }, 70);
             }
+        }
+            
         popupBtn.forEach(elem  => {
             elem.addEventListener('click', popUpAnimation);
         });
@@ -93,12 +98,4 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     togglePopUp();
 
-
-
-
-    
-
-
-
-});
-
+});;

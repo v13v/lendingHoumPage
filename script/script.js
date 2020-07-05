@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         setInterval(appDateClock, 1000);
     }
-    countTimer('05, july, 2020');
+    countTimer('07, july, 2020');
 
     //Menu
     const toggleMenu = () => {
@@ -148,8 +148,60 @@ const tabs =()=>{
 
 
 
-    
+    //Слайдер
 
+    const slider = () =>{
+        const slide = document.querySelectorAll('.portfolio-item'),
+        btn = document.querySelectorAll('.portfolio-btn'),
+        dot = document.querySelectorAll('.dot'),
+        slider = document.querySelector('.portfolio-content');
+
+        let currentSlide = 0;
+        const prevSlide = (elem, index, strClass)=>{
+            elem[index].classList.remove(strClass);
+        };
+        const nextSlide = (elem, index, strClass)=>{
+            elem[index].classList.add(strClass);
+        };
+        const autoPlaySlide = () =>{
+            prevSlide(slide, currentSlide, 'portfolio-item-active');
+            prevSlide(dot, currentSlide, 'dot-active');
+            currentSlide++;
+            if(currentSlide >= slide.length){
+                currentSlide = 0;
+            }      
+            nextSlide(slide, currentSlide, 'portfolio-item-active');
+            nextSlide(dot, currentSlide, 'dot-active');
+        };
+        const startSlide =(time)=>{
+            setInterval(autoPlaySlide,time);
+        };
+        const stopSlide =()=>{
+
+        }
+        startSlide(1500);
+        slider.addEventListener('click',(event)=>{
+            event.preventDefault();
+            let target = event.target;
+
+            prevSlide(slide, currentSlide, 'portfolio-item-active');
+            prevSlide(dot, currentSlide, 'dot-active');
+            if(target.matches('#arrow-right')){
+                currentSlide++;
+            }else if(target.matches('#arrow-left')){
+                currentSlide--;
+            }else if(target.matches('.dot')){
+                dot.forEach((elem, index)=>{
+                    if(elem === target){
+                        currentSlide = index;
+                    }
+                })
+            }
+            nextSlide(slide, currentSlide, 'portfolio-item-active');
+            nextSlide(dot, currentSlide, 'dot-active');
+        })
+    }
+slider();
 
 
 
